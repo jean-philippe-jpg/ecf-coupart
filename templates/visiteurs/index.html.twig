@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello VisiteursController!{% endblock %}
+
+{% block body %}
+<style>
+    
+
+    div{
+
+        display: block;
+    }
+</style>
+
+
+
+<div>
+    {% for totals in total %}
+
+    
+    
+
+        {{ totals.id }}
+        {{ totals.titre }}
+        {{ totals.description }}
+        {{ totals.preparation }}
+        {{ totals.repos }}
+        {{ totals.cuisson }}
+        {{ totals.ingredients }}
+        {{ totals.etapes }}
+        {{ totals.allergene }}
+        {{ totals.regime }}
+    
+        
+   
+
+    {% endfor %}
+</div>
+
+{% endblock %}
