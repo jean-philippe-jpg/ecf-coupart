@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Patients;
+use App\Entity\Commentaire;
 use App\Form\PatientsType;
 use App\Repository\PatientsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -77,5 +78,12 @@ class PatientsController extends AbstractController
         }
 
         return $this->redirectToRoute('app_patients_index', [], Response::HTTP_SEE_OTHER);
+
     }
+
+   
+    
+        
 }
+
+

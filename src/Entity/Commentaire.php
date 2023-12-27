@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\CommentaireRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommentaireRepository::class)]
@@ -15,27 +14,24 @@ class Commentaire
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $username = null;
+    private ?string $pseudo = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(length: 255)]
     private ?string $message = null;
-
-    #[ORM\ManyToOne(inversedBy: 'commentaires')]
-    private ?patients $patients = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUsername(): ?string
+    public function getPseudo(): ?string
     {
-        return $this->username;
+        return $this->pseudo;
     }
 
-    public function setUsername(string $username): static
+    public function setPseudo(string $pseudo): static
     {
-        $this->username = $username;
+        $this->pseudo = $pseudo;
 
         return $this;
     }
@@ -48,18 +44,6 @@ class Commentaire
     public function setMessage(string $message): static
     {
         $this->message = $message;
-
-        return $this;
-    }
-
-    public function getPatients(): ?patients
-    {
-        return $this->patients;
-    }
-
-    public function setPatients(?patients $patients): static
-    {
-        $this->patients = $patients;
 
         return $this;
     }

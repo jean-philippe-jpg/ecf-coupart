@@ -23,7 +23,7 @@ class RecettesController extends AbstractController
     }
 
     #[Route('/new', name: 'app_recettes_new', methods: ['GET', 'POST'])]
-    public function new(Request $Request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $recette = new Recettes();
         $form = $this->createForm(RecettesType::class, $recette);
