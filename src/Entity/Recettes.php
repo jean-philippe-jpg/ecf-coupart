@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RecettesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -43,6 +45,14 @@ class Recettes
 
     #[ORM\ManyToOne(inversedBy: 'recettes')]
     private ?Patients $patients = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'recettes')]
+    private Collection $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -165,6 +175,33 @@ class Recettes
     public function setPatients(?Patients $patients): static
     {
         $this->patients = $patients;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeRecette($this);
+        }
 
         return $this;
     }
