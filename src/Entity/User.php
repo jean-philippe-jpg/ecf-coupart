@@ -41,7 +41,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $regime = null;
 
-    #[ORM\ManyToMany(targetEntity: recettes::class, inversedBy: 'users')]
+    #[ORM\ManyToMany(targetEntity: Recettes::class, inversedBy: 'users')]
+    #[JoinTable(name: 'user_recettes')]
     private Collection $recettes;
 
     public function __construct()
@@ -55,11 +56,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-    public function __CONSTRUCT(){
+    //public function __CONSTRUCT(){
 
-      $this->createdAt = new \DateTimeImmutable();
+        //$this->createdAt = new \DateTimeImmutable();
 
-    }
+   //}
 
     public function getUseraname(): ?string
     {

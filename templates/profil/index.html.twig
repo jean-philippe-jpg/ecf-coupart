@@ -4,8 +4,11 @@
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+   
+    .stars{
+
+        padding: 40px;
+    }
 </style>
 
 <div> bonjour mon {{  app.user.useraname}}</div>
@@ -18,5 +21,98 @@
 {{ form(commentaireForm) }}
 
 
+<div class="stars">
+    <i class="lar la-star" data-value="1"></i><i class="lar la-star" 
+    data-value="2"></i><i class="lar la-star" data-value="3"></i><i class="lar la-star" 
+    data-value="4"></i><i class="lar la-star" data-value="5"></i>
+   
+    
+</div>
+
+<input  type="hidden" style="margin-left: 40px;" name="note" id="note" value="0">
+
+
+
 
 {% endblock %}
+
+
+{% block javascripts %}
+<script>
+
+    window.onload= () =>{
+
+        const stars = document.querySelectorAll(".la-star" );
+        
+        const note = document.querySelector("#note");
+
+
+       for(star of stars){
+        star.addEventListener("mouseover", function(){
+            resetStars();
+            this.style.color = "red";
+           this.classList.add("las");
+           this.classList.remove("lar");
+
+         let previousStar = this.previousElementSibling;
+
+         while(previousStar){
+
+            previousStar.style.color = "red";
+            previousStar = previousStar.previousElementSibling;
+         }
+         
+        });
+
+    }
+
+    function resetStars(){
+
+        for(star of stars){
+
+            star.style.color = "black";
+        }
+
+
+    for(star of stars){
+
+        star.addEventListener("click", function(){
+
+          note.value = this.dataset.value
+        });
+      
+
+      star.addEventListener("mouseout", function(){
+        resetStars(note.value)
+    });
+}
+
+          function resetStars(note = 0){
+
+                  for(star of stars){
+
+                    if(star.dataset.value > note){
+                        star.style.color = "black";
+                        star.classList.add("las")
+                        star.classList.remove("lar")
+                    }else{
+
+                        star.style.color = "red"
+                        star.classList.add("las")
+                        star.classList.remove("lar")
+                    }
+
+                     
+                  }
+          }
+
+        }
+
+  }
+
+
+
+
+</script>
+
+        {% endblock %}

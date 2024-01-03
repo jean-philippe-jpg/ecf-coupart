@@ -19,6 +19,7 @@ class Commentaire
     #[ORM\Column(length: 255)]
     private ?string $message = null;
 
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -47,4 +48,6 @@ class Commentaire
 
         return $this;
     }
+
+    
 }

@@ -21,6 +21,7 @@ class RecettesType extends AbstractType
             ->add('etapes')
             ->add('allergene')
             ->add('regime')
+            ->add('user_id')
         ;
     }
 

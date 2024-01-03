@@ -43,8 +43,8 @@ class Recettes
     #[ORM\Column(length: 255)]
     private ?string $regime = null;
 
-    #[ORM\ManyToOne(inversedBy: 'recettes')]
-    private ?Patients $patients = null;
+    //#[ORM\ManyToOne(inversedBy: 'recettes')]
+    //private ?Patients $patients = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'recettes')]
     private Collection $users;
@@ -167,17 +167,17 @@ class Recettes
         return $this;
     }
 
-    public function getPatients(): ?Patients
-    {
-        return $this->patients;
-    }
+    //public function getPatients(): ?Patients
+    //{
+        //return $this->patients;
+    //}
 
-    public function setPatients(?Patients $patients): static
-    {
-        $this->patients = $patients;
+    //public function setPatients(?Patients $patients): static
+    //{
+       // $this->patients = $patients;
 
-        return $this;
-    }
+       // return $this;
+   // }
 
     /**
      * @return Collection<int, User>

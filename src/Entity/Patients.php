@@ -27,8 +27,8 @@ class Patients
     #[ORM\Column(length: 255)]
     private ?string $regime = null;
 
-    #[ORM\OneToMany(mappedBy: 'patients', targetEntity: Recettes::class)]
-    private Collection $recettes;
+   // #[ORM\OneToMany(mappedBy: 'patients', targetEntity: Recettes::class)]
+    //private Collection $recettes;
 
    
     public function __construct()

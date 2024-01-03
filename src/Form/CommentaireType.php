@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CommentaireType extends AbstractType
 {
@@ -15,8 +16,7 @@ class CommentaireType extends AbstractType
         $builder
             ->add('pseudo')
             ->add('message')
-            ->add('envoyer', SubmitType::class)
-        ;
+            ->add('envoyer', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
