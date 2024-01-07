@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class VisiteursController extends AbstractController
 {
-    #[Route('/', name: 'app_visiteurs', methods: ['GET'])]
+   #[Route('/', name: 'app_visiteurs', methods: ['GET'])]
     public function index(CommentaireRepository $CommentaireRepository, RecettesRepository $RecettesRepository,
     PaginatorInterface $paginator, Request $request)
     : Response
@@ -32,11 +32,11 @@ class VisiteursController extends AbstractController
             $datas,
             $request->query->getInt('page', 1),
             3
-        );
+       );
         return $this->render('visiteurs/index.html.twig', [
             'total' => $recettes,
             'totalComments' =>$comments,
-        ]);
+       ]);
     }
 
    

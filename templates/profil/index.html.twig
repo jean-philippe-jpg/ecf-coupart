@@ -13,8 +13,20 @@
 
 <div> bonjour mon {{  app.user.useraname}}</div>
 <div> prenom {{  app.user.prenom}}</div>
-<div> allergenes {{  app.user.allergenes}}</div>
+<div > allergenes {{  app.user.allergenes}}</div>
 <div> regime {{  app.user.regime}}</div>
+
+
+
+
+
+{% if app.user.roles == 'ROLE_ADMIN' %}
+
+     
+
+{% endif %}
+
+
 
 <a type="button" href="{{path('app_logout')}}" > deconnection </a>
 

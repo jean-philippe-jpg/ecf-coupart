@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+
 use App\Repository\RecettesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -52,6 +53,13 @@ class Recettes
     public function __construct()
     {
         $this->users = new ArrayCollection();
+    }
+
+    public function __toString()
+
+    {
+    
+        return $this->getTitre().' '.$this->getAllergene().' '.$this->getRegime();
     }
 
     public function getId(): ?int

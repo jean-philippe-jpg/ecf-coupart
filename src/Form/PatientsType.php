@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Patients;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,8 +16,9 @@ class PatientsType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('allergenes')
-            ->add('regime')
-        ;
+            ->add('regime');
+           
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void

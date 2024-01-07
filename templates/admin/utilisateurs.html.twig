@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+{% for user in users %}
+
+
+<div >
+    {{ user.id}}
+    {{ user.useraname}}
+    {{ user.prenom}}
+    {% for role in user.roles %}
+
+       {% if role == "ROLE_USER" %}
+        <strong>patient</strong>
+
+         {% elseif role == "ROLE_ADMIN" %}
+         <strong>administrateur</strong>
+
+       {% endif %}
+    {% endfor %}
+ </div>
+   
+    
+
+{% endfor %}
+{% endblock %}

@@ -36,10 +36,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $allergenes = null;
+    #[Assert\Null]
+    private ?string $allergenes ;
 
     #[ORM\Column(length: 255)]
-    private ?string $regime = null;
+    #[Assert\Null]
+    private ?string $regime ;
 
     #[ORM\ManyToMany(targetEntity: Recettes::class, inversedBy: 'users')]
     #[JoinTable(name: 'user_recettes')]
@@ -50,6 +52,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->recettes = new ArrayCollection();
     }
 
+
+    public function __toString()
+
+{
+
+    return $this->getUseraname().' '.$this->getPrenom();
+}
     public function getId(): ?int
     {
         return $this->id;
