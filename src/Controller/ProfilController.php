@@ -12,10 +12,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
-
+#[Route('/profil', name: 'app_profil')]
 class ProfilController extends AbstractController
 {
-    #[Route('/profil', name: 'app_profil')]
+    #[Route('/', name: 'app_profil')]
     public function index(CommentaireRepository $CommentaireRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         $commentaire = new Commentaire;
@@ -39,6 +39,23 @@ class ProfilController extends AbstractController
         ]);
        
     }
+
+    #[Route('/recettes', name: 'app_profil_recettes')]
+
+    public function recettes( ): Response
+    {
+       
+        
+            $recettes = 'liste des recettes du ';
+
+        return $this->render('profil/recettes.html.twig', [ 
+
+            'lulu' => $recettes
+        ]);
+       
+    }
+
+
 
    
 }

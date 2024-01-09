@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\Recettes;
+use App\Entity\NoteRecettes;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -48,5 +49,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
          yield MenuItem::linkToCrud('recettes', 'fas fa-list', Recettes::class);
          yield MenuItem::linkToCrud('patients', 'fa-solid fa-user', User::class);
+         #yield MenuItem::linkToCrud('note', 'fa-solid fa-user', NoteRecettes::class);
     }
 }

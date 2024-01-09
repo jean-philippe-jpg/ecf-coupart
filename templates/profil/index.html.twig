@@ -9,27 +9,30 @@
 
         padding: 40px;
     }
+
+    .comm{
+
+        display: none;
+    }
+
+    .card-profil{
+
+       
+       margin-top: 20px;
+       margin-left: 40vw;
+    }
+
+    
 </style>
 
-<div> bonjour mon {{  app.user.useraname}}</div>
-<div> prenom {{  app.user.prenom}}</div>
-<div > allergenes {{  app.user.allergenes}}</div>
-<div> regime {{  app.user.regime}}</div>
+<div class="card-profil">
 
+<h3> bonjour {{  app.user.prenom}}</h3>
 
+<a type="button" href="{{path('app_logout')}}" >deconnexion</a></a>
+</div>
 
-
-
-{% if app.user.roles == 'ROLE_ADMIN' %}
-
-     
-
-{% endif %}
-
-
-
-<a type="button" href="{{path('app_logout')}}" > deconnection </a>
-
+<div class="comm">
 {{ form(commentaireForm) }}
 
 
@@ -44,7 +47,7 @@
 <input  type="hidden" style="margin-left: 40px;" name="note" id="note" value="0">
 
 
-
+</div>
 
 {% endblock %}
 

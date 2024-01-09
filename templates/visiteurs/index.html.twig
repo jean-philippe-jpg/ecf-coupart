@@ -15,7 +15,7 @@
 
     .recettes{
         
-        height: 200px;
+        
         width: 200px;
         margin-top: 50px;
         margin-left: 50px;
@@ -78,6 +78,7 @@
        
         {{ totals.titre }}
         {{ totals.description }}
+       
         <div class="description">
         {{ totals.preparation }}
         {{ totals.repos }}
@@ -86,7 +87,12 @@
         {{ totals.etapes }}
         {{ totals.allergene }}
         {{ totals.regime }}
+        </div>
+       <br> 
+        <button type="button" id="btn" href="#" style="width: 70px; height: 30px;  border-radius: 8px;  background: lightblue;">voire</button>
+        
     </div>
+    
 </div>
     {% endfor %}
     <div class="pagination">
@@ -116,7 +122,18 @@
 <div class="pagination">
 
     {{ knp_pagination_render(totalComments, 'base/pagination.html.twig')}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </div>
+{% block javascripts %}
+<script>
 
+// Attacher un gestionnaire d'événements au clic de souris sur un bouton
+$('button').click( function() {
+  $(this).addClass('description');
+});
+
+</script>
+    
+{% endblock  %}
 
 {% endblock %}

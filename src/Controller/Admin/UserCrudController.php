@@ -21,6 +21,8 @@ class UserCrudController extends AbstractCrudController
     {
         yield from parent::configureFields($pageName);
         yield AssociationField::new('recettes');
+        
+
     }
     
 }

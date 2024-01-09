@@ -1,14 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello AdminController!{% endblock %}
+{% block stylesheets %}
+
+<style>
+.liste-utilisateurs{
+  
+  margin-top: 20px;
+  margin-left: 40vw; 
+}
+</style>
+   
+{% endblock  %}
 
 {% block body %}
+
 {% for user in users %}
-
-
-<div >
-    {{ user.id}}
-    {{ user.useraname}}
+<div class="liste-utilisateurs">
     {{ user.prenom}}
     {% for role in user.roles %}
 

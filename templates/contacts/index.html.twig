@@ -2,11 +2,25 @@
 
 {% block title %}Hello ContactsController!{% endblock %}
 
+{% block stylesheets  %}
+<style>
+
+    .contactForm{
+        
+        margin-top: 20px;
+        margin-left: 40vw;
+    }
+</style>
+    
+{% endblock  %}
+
 {% block body %}
 
 
-
-    {{ form( contactForm )}}
+     <div class="contactForm">
+        {{ form( contactForm )}}
+     </div>
+    
 
   
 {% endblock %}
