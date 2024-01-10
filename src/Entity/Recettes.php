@@ -50,16 +50,20 @@ class Recettes
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'recettes')]
     private Collection $users;
 
+    #[ORM\OneToMany(mappedBy: 'recettes', targetEntity: commentsRecettes::class)]
+    private Collection $commentaire;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->commentaire = new ArrayCollection();
     }
 
     public function __toString()
 
     {
     
-        return $this->getTitre().' '.$this->getAllergene().' '.$this->getRegime();
+        return $this->getTitre();#.' '.$this->getAllergene().' '.$this->getRegime();
     }
 
     public function getId(): ?int
@@ -175,17 +179,17 @@ class Recettes
         return $this;
     }
 
-    //public function getPatients(): ?Patients
-    //{
-        //return $this->patients;
-    //}
+    public function getPatients(): ?Patients
+    {
+        return $this->patients;
+    }
 
-    //public function setPatients(?Patients $patients): static
-    //{
-       // $this->patients = $patients;
+    public function setPatients(?Patients $patients): static
+    {
+        $this->patients = $patients;
 
-       // return $this;
-   // }
+        return $this;
+    }
 
     /**
      * @return Collection<int, User>
@@ -209,6 +213,36 @@ class Recettes
     {
         if ($this->users->removeElement($user)) {
             $user->removeRecette($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, commentsRecettes>
+     */
+    public function getCommentaire(): Collection
+    {
+        return $this->commentaire;
+    }
+
+    public function addCommentaire(commentsRecettes $commentaire): static
+    {
+        if (!$this->commentaire->contains($commentaire)) {
+            $this->commentaire->add($commentaire);
+            $commentaire->setRecettes($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(commentsRecettes $commentaire): static
+    {
+        if ($this->commentaire->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getRecettes() === $this) {
+                $commentaire->setRecettes(null);
+            }
         }
 
         return $this;

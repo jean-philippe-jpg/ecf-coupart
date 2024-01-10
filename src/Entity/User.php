@@ -47,9 +47,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[JoinTable(name: 'user_recettes')]
     private Collection $recettes;
 
+    #[ORM\OneToMany(mappedBy: 'users', targetEntity: CommentsRecettes::class)]
+    private Collection $commentsRecettes;
+
     public function __construct()
     {
         $this->recettes = new ArrayCollection();
+        $this->commentsRecettes = new ArrayCollection();
     }
 
 
@@ -58,10 +62,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
 
     return $this->getUseraname().' '.$this->getPrenom();
+       
+    
 }
     public function getId(): ?int
     {
         return $this->id;
+
     }
 
 
@@ -192,6 +199,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeRecette(recettes $recette): static
     {
         $this->recettes->removeElement($recette);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommentsRecettes>
+     */
+    public function getCommentsRecettes(): Collection
+    {
+        return $this->commentsRecettes;
+    }
+
+    public function addCommentsRecette(CommentsRecettes $commentsRecette): static
+    {
+        if (!$this->commentsRecettes->contains($commentsRecette)) {
+            $this->commentsRecettes->add($commentsRecette);
+            $commentsRecette->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentsRecette(CommentsRecettes $commentsRecette): static
+    {
+        if ($this->commentsRecettes->removeElement($commentsRecette)) {
+            // set the owning side to null (unless already changed)
+            if ($commentsRecette->getUsers() === $this) {
+                $commentsRecette->setUsers(null);
+            }
+        }
 
         return $this;
     }
