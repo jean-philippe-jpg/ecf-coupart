@@ -50,5 +50,6 @@ class DashboardController extends AbstractDashboardController
          yield MenuItem::linkToCrud('recettes', 'fas fa-list', Recettes::class);
          yield MenuItem::linkToCrud('patients', 'fa-solid fa-user', User::class);
          yield MenuItem::linkToCrud('commentsRecettes', 'fa-regular fa-comment', CommentsRecettes::class);
+         
     }
 }

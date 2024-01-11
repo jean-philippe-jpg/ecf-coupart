@@ -6,7 +6,21 @@
 
 {% block body %}
 <h3>{{ lulu }}</h3>
+<br>
 
 
+{% for total in totals %}
+
+    <div style="background: lightcoral;  margin-top: 50px; margin-left: 50px; width: 200px;">
+            {{ total.titre }}
+            <br>
+        {{ total.description}}
+        
+    </div>
+    
+
+
+
+{% endfor %}
 
 {% endblock %}

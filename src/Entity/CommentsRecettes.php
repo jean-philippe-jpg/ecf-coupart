@@ -23,7 +23,7 @@ class CommentsRecettes
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $note = null;
 
-    #[ORM\ManyToOne(inversedBy: 'commentsRecettes')]
+    #[ORM\ManyToOne(inversedBy: 'CommentsRecettes')]
     private ?user $users = null;
 
     #[ORM\ManyToOne(inversedBy: 'commentaire')]

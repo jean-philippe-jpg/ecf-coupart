@@ -101,29 +101,6 @@
     </div>
     
    
-
-    <div class="card-commentaire">
-    {% for totalComment in totalComments %}
-
-      <div class="commentaires">
-        <div class="stars">
-            <i class="lar la-star" data-value="1"></i><i class="lar la-star" 
-            data-value="2"></i><i class="lar la-star" data-value="3"></i><i class="lar la-star" 
-            data-value="4"></i><i class="lar la-star" data-value="5"></i>
-           
-            
-        </div>
-        <input  type="hidden" style="margin-left: 40px;" name="note" id="note" value="0">
-      <p class="pseudo">{{ totalComment.pseudo }}</p>
-      <p  class="message">{{ totalComment.message}}</p>
-      </div>
-  {% endfor %}
-</div>
-<div class="pagination">
-
-    {{ knp_pagination_render(totalComments, 'base/pagination.html.twig')}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-</div>
 {% block javascripts %}
 <script>
 

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+
 use Symfony\Component\validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -36,15 +37,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Null]
+    ##[Assert\Null]
     private ?string $allergenes ;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Null]
+    ##[Assert\Null]
     private ?string $regime ;
 
     #[ORM\ManyToMany(targetEntity: Recettes::class, inversedBy: 'users')]
-    #[JoinTable(name: 'user_recettes')]
+    ##[JoinTable(name: 'user_recettes')]
     private Collection $recettes;
 
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: CommentsRecettes::class)]
@@ -72,11 +73,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-    //public function __CONSTRUCT(){
+    #public function __CONSTRUCT(){
 
-        //$this->createdAt = new \DateTimeImmutable();
+        #$this->createdAt = new \DateTimeImmutable();
 
-   //}
+   #}
 
     public function getUseraname(): ?string
     {
