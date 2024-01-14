@@ -3,13 +3,15 @@
 namespace App\Entity;
 
 
-use App\Repository\RecettesRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+#use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RecettesRepository;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Form\Extension\Core\type\DateTimeType;
 
 #[ORM\Entity(repositoryClass: RecettesRepository::class)]
 #[Vich\Uploadable]
@@ -47,6 +49,15 @@ class Recettes
     #[ORM\Column(length: 255)]
     private ?string $regime = null;
 
+    ##[ORM\ManyToOne(inversedBy: 'recettes')]
+    #private ?\Patients $patients = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'recettes')]
+    private Collection $users;
+
+    #[ORM\OneToMany(mappedBy: 'recettes', targetEntity: commentsRecettes::class)]
+    private Collection $commentaire;
+
     #[Vich\UploadableField(mapping: 'recettes', fileNameProperty: 'imageName', size: 'imageSize')]
     private ?File $imageFile = null;
 
@@ -56,19 +67,9 @@ class Recettes
     #[ORM\Column(nullable: true)]
     private ?int $imageSize = null;
 
+    
     #[ORM\Column(nullable: true)]
      private ?\DateTimeImmutable $updatedAt = null;
-
-   
-
-    ##[ORM\ManyToOne(inversedBy: 'recettes')]
-   # private ?Patients $patients = null;
-
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'recettes')]
-    private Collection $users;
-
-    #[ORM\OneToMany(mappedBy: 'recettes', targetEntity: commentsRecettes::class)]
-    private Collection $commentaire;
 
     public function __construct()
     {
@@ -281,7 +282,7 @@ class Recettes
         if (null !== $imageFile) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
+            //$this->updatedAt = new \DateTimeImmutable();
         }
     }
 
