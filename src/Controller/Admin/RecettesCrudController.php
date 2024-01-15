@@ -6,6 +6,7 @@ use App\Entity\Recettes;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -26,10 +27,13 @@ class RecettesCrudController extends AbstractCrudController
         yield TextField::new('allergene');
         yield TextField::new('regime');
         yield TextareaField::new('imageFile')->setFormType(VichImageType::class)->hideOnIndex();
+       # yield ImageField::new('imageName')->setBasePath($recettesImagePath)->hideOnIndex();
         yield AssociationField::new('users');
         
         
     }
+
+
 
 };
 

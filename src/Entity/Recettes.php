@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 
-#use DateTimeImmutable;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\RecettesRepository;
@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Form\Extension\Core\type\DateTimeType;
 
 #[ORM\Entity(repositoryClass: RecettesRepository::class)]
@@ -55,7 +56,7 @@ class Recettes
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'recettes')]
     private Collection $users;
 
-    #[ORM\OneToMany(mappedBy: 'recettes', targetEntity: commentsRecettes::class)]
+    #[ORM\OneToMany(mappedBy: 'recettes', targetEntity: CommentsRecettes::class)]
     private Collection $commentaire;
 
     #[Vich\UploadableField(mapping: 'recettes', fileNameProperty: 'imageName', size: 'imageSize')]
@@ -69,7 +70,11 @@ class Recettes
 
     
     #[ORM\Column(nullable: true)]
-     private ?\DateTimeImmutable $updatedAt = null;
+     private ?DateTimeImmutable $updatedAt = null;
+
+
+
+     
 
     public function __construct()
     {
@@ -273,42 +278,44 @@ class Recettes
      * must be able to accept an instance of 'File' as the bundle will inject one here
      * during Doctrine hydration.
      *
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     * @param File|UploadedFile|null $imageFile
      */
     public function setImageFile(?File $imageFile = null): void
-      {
-        $this->imageFile = $imageFile;
-
-        if (null !== $imageFile) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
-            //$this->updatedAt = new \DateTimeImmutable();
-        }
-    }
-
-    public function getImageFile(): ?File
     {
-        return $this->imageFile;
-    }
+      $this->imageFile = $imageFile;
 
-    public function setImageName(?string $imageName): void
-    {
-        $this->imageName = $imageName;
-    }
+      if (null !== $imageFile) {
+          // It is required that at least one field changes if you are using doctrine
+           //otherwise the event listeners won't be called and the file is lost
+          $this->updatedAt = new \DateTimeImmutable();
+      }
+  }
 
-    public function getImageName(): ?string
-     {
-        return $this->imageName;
-    }
+  public function getImageFile(): ?File
+  {
+      return $this->imageFile;
+  }
 
-    public function setImageSize(?int $imageSize): void
-    {
-        $this->imageSize = $imageSize;
-    }
+  public function setImageName(?string $imageName): void
+  {
+      $this->imageName = $imageName;
+  }
 
-    public function getImageSize(): ?int
-    {
-        return $this->imageSize;
-    }
+  public function getImageName(): ?string
+   {
+      return $this->imageName;
+  }
+
+  public function setImageSize(?int $imageSize): void
+  {
+      $this->imageSize = $imageSize;
+  }
+
+  public function getImageSize(): ?int
+  {
+      return $this->imageSize;
+  }
+
+    
 
 }
