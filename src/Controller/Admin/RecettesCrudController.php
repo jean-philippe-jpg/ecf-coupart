@@ -27,7 +27,6 @@ class RecettesCrudController extends AbstractCrudController
         yield TextField::new('allergene');
         yield TextField::new('regime');
         yield TextareaField::new('imageFile')->setFormType(VichImageType::class)->hideOnIndex();
-       # yield ImageField::new('imageName')->setBasePath($recettesImagePath)->hideOnIndex();
         yield AssociationField::new('users');
         
         

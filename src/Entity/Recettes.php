@@ -3,7 +3,8 @@
 namespace App\Entity;
 
 
-use DateTimeImmutable;
+
+
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\RecettesRepository;
@@ -12,14 +13,15 @@ use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Form\Extension\Core\type\DateTimeType;
+
+
+
 
 #[ORM\Entity(repositoryClass: RecettesRepository::class)]
 #[Vich\Uploadable]
 class Recettes
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
@@ -50,15 +52,6 @@ class Recettes
     #[ORM\Column(length: 255)]
     private ?string $regime = null;
 
-    ##[ORM\ManyToOne(inversedBy: 'recettes')]
-    #private ?\Patients $patients = null;
-
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'recettes')]
-    private Collection $users;
-
-    #[ORM\OneToMany(mappedBy: 'recettes', targetEntity: CommentsRecettes::class)]
-    private Collection $commentaire;
-
     #[Vich\UploadableField(mapping: 'recettes', fileNameProperty: 'imageName', size: 'imageSize')]
     private ?File $imageFile = null;
 
@@ -70,14 +63,25 @@ class Recettes
 
     
     #[ORM\Column(nullable: true)]
-     private ?DateTimeImmutable $updatedAt = null;
+    private ?\DateTimeImmutable $updatedAt = null;
+
+    ##[ORM\ManyToOne(inversedBy: 'recettes')]
+    #private ?\Patients $patients = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'recettes')]
+    private Collection $users;
+
+    #[ORM\OneToMany(mappedBy: 'recettes', targetEntity: CommentsRecettes::class)]
+    private Collection $commentaire;
+
+    
 
 
 
      
 
     public function __construct()
-    {
+    {   
         $this->users = new ArrayCollection();
         $this->commentaire = new ArrayCollection();
     }
@@ -85,8 +89,7 @@ class Recettes
     public function __toString()
 
     {
-    
-        return $this->getTitre();#.' '.$this->getAllergene().' '.$this->getRegime();
+        return $this->getTitre().' '.$this->getId();#.' '.$this->getImageName();
     }
 
     public function getId(): ?int
@@ -278,7 +281,7 @@ class Recettes
      * must be able to accept an instance of 'File' as the bundle will inject one here
      * during Doctrine hydration.
      *
-     * @param File|UploadedFile|null $imageFile
+     * @param File|Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
      */
     public function setImageFile(?File $imageFile = null): void
     {
