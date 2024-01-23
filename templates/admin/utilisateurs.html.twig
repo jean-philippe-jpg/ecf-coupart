@@ -1,19 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello AdminController!{% endblock %}
-{% block stylesheets %}
-
-<style>
-.liste-utilisateurs{
-  
-  margin-top: 20px;
-  margin-left: 40vw; 
-}
-</style>
-   
-{% endblock  %}
 
 {% block body %}
+<style>
+  .liste-utilisateurs{
+    
+    margin-top: 20px;
+    margin-left: 40vw; 
+  }
+
+</style>
 
 {% for user in users %}
 <div class="liste-utilisateurs">
@@ -21,10 +18,10 @@
     {% for role in user.roles %}
 
        {% if role == "ROLE_USER" %}
-        <strong>patient</strong>
+        <strong class="role">patient</strong>
 
          {% elseif role == "ROLE_ADMIN" %}
-         <strong>administrateur</strong>
+         <strong class="role">administrateur</strong>
 
        {% endif %}
     {% endfor %}

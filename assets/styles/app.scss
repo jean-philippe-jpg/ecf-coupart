@@ -1,0 +1,50 @@
+
+$teal: #20c997;
+$pink: #d63384;
+
+@import "~bootstrap/scss/bootstrap";
+
+
+body {
+    
+    background:  $teal;
+
+
+}
+
+.role{
+
+    color: $pink-500;
+}
+
+.navbar{
+
+    background: $pink;
+
+
+}
+
+.nav-link{
+
+    color: $teal;
+    
+}
+
+.accueil{
+
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    color: $pink;
+    margin-right: 10vw;
+    //margin-top: 20vh;
+    
+}
+
+.list-container{
+
+    //margin-left: 10vw;
+  margin-top: 10vh;
+  margin-left: 25vw;
+}
+

@@ -8,50 +8,65 @@ use App\Entity\CommentsRecettes;
 use App\Form\CommentsRecettesType;
 use App\Repository\UserRepository;
 use App\Repository\RecettesRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-
-#[Route('/', name: 'app_accueil')]
 class AdminController extends AbstractController
 {
-    #[Route('/', name: 'index')]
-    public function index(RecettesRepository $RecettesRepository): Response
+    #[Route('/', name: 'app_index_recette')]
+    public function index(RecettesRepository $RecettesRepository, ParameterBagInterface $parameterBagInterface, Request $request): Response
     {
-
-        $Recette = $RecettesRepository->findBy([], [ 'id' => 'DESC']);
+        $limit = $parameterBagInterface->get('home_recipes_limit');
+        $Recettes = $RecettesRepository->findBy([], [ 'id' => 'DESC'],  $limit);
         
         return $this->render('admin/index.html.twig', [
-
-            'recettes' => $Recette
+            'recettes' => $Recettes
         ]);
     }
 
 
+    #[Route('/recette/{recette}', name: 'app_detail_recette')]
+    public function detail(Recettes $recette, Request $request, EntityManagerInterface $entityManagerInterface): response
+    {
+            
+            $commentaire = new CommentsRecettes();
+            $form = $this->createForm(CommentsRecettesType::class, $commentaire);
+            $form->handleRequest($request);
+
+
+            if ($form->isSubmitted() && $form->isValid()){
+                
+                $entityManagerInterface->persist($commentaire);
+                $entityManagerInterface->flush();
+
+            }
+
+         return $this->render('admin/detail.html.twig', [
+        'recette' => $recette,
+        'form' => $form->createView()
+       ]);
+
+    }
+
+
+      #[Route('/utilisateurs', name: 'utilisateurs')]
+      public function listeUtilisateurs(UserRepository $User): response
+      {
+         return $this->render('admin/utilisateurs.html.twig', [
+  
+          'users' => $User->findAll()
+         ]);
+  
+      }
+    }
+
+
+    
     // liste des utilisateurs
 
-    #[Route('/utilisateurs', name: 'utilisateurs')]
-    public function listeUtilisateurs(UserRepository $User): response
-    {
-       return $this->render('admin/utilisateurs.html.twig', [
+   
 
-        'users' => $User->findAll()
-       ]);
-
-    }
-
-    #[Route('/detail/{id}', name: 'app_detail_recette')]
-    public function detail(Recettes $recette): response
-    {
-        
-
-         $form = $this->createForm(CommentsRecettesType::class);
-       return $this->render('admin/detail.html.twig', [
-        'detail' => $recette,
-        'commentaire' => $form,
-       ]);
-
-    }
-}

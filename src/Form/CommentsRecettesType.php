@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\CommentsRecettes;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -16,10 +17,18 @@ class CommentsRecettesType extends AbstractType
         $builder
             ->add('pseudo')
             ->add('message')
-            ->add('note')
-            ->add('users')
-            ->add('recettes', TextareaType::class)
+            ->add('note', ChoiceType::class, [
+                'label' => 'note',
+                'choice'=> [
+                    '5' => 5,
+                    '4' => 4,
+                    '3' => 3,
+                    '2' => 2,
+                    '1' => 1,
+                ]
+            ])
             ->add('envoyer', SubmitType::class)
+            
         ;
     }
 

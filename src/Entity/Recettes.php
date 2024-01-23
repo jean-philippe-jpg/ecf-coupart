@@ -2,9 +2,6 @@
 
 namespace App\Entity;
 
-
-
-
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\RecettesRepository;
@@ -17,11 +14,15 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 
+
+
+
 #[ORM\Entity(repositoryClass: RecettesRepository::class)]
 #[Vich\Uploadable]
 class Recettes
 {
     #[ORM\Id]
+    #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
@@ -58,7 +59,7 @@ class Recettes
     #[ORM\Column(nullable: true)]
     private ?string $imageName = null;
 
-    #[ORM\Column(nullable: true)]
+   #[ORM\Column(nullable: true)]
     private ?int $imageSize = null;
 
     
@@ -75,11 +76,6 @@ class Recettes
     private Collection $commentaire;
 
     
-
-
-
-     
-
     public function __construct()
     {   
         $this->users = new ArrayCollection();
@@ -89,7 +85,7 @@ class Recettes
     public function __toString()
 
     {
-        return $this->getTitre().' '.$this->getId();#.' '.$this->getImageName();
+        return $this->getTitre();#.' '.$this->getId();#.' '.$this->getImageName();
     }
 
     public function getId(): ?int
@@ -205,6 +201,7 @@ class Recettes
         return $this;
     }
 
+   
    # public function getPatients(): ?Patients
     #{
         #return $this->patients;
@@ -284,15 +281,27 @@ class Recettes
      * @param File|Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
      */
     public function setImageFile(?File $imageFile = null): void
-    {
+     {
       $this->imageFile = $imageFile;
 
       if (null !== $imageFile) {
-          // It is required that at least one field changes if you are using doctrine
+           //It is required that at least one field changes if you are using doctrine
            //otherwise the event listeners won't be called and the file is lost
           $this->updatedAt = new \DateTimeImmutable();
+      
+      
       }
-  }
+    }
+   
+    public function getUpdatedAt(): ?File
+    {
+        return $this->updatedAt;
+    }
+  
+    public function setUpdatedAt(?string $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
 
   public function getImageFile(): ?File
   {
@@ -305,20 +314,20 @@ class Recettes
   }
 
   public function getImageName(): ?string
-   {
+    {
       return $this->imageName;
   }
 
   public function setImageSize(?int $imageSize): void
-  {
+   {
       $this->imageSize = $imageSize;
-  }
+   }
 
-  public function getImageSize(): ?int
-  {
-      return $this->imageSize;
-  }
-
+   public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+      
     
-
+   
 }

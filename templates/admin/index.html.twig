@@ -2,43 +2,18 @@
 
 {% block title %}Hello AdminController!{% endblock %}
 
-{% block stylesheets %}
 
-<style>
-
-    
-    body{
-
-       background: lightgray;
-    }
-
-    
-    
-      
-   
-    .accueil{
-        margin-top: 20px;
-        margin-left: 200px;
-
-    }
-
-    
-
-</style>
-
-{% endblock %}
 
 {% block body %}
-<div class="row">
-
+<div class="row  list-container">
    {% for recette in recettes %}
     
         <div class="card accueil" style="width: 18rem;">
-          <img src="{{ vich_uploader_asset(recette, 'imageFile') }}" class="card-img-top" alt="recettes">
+          <img src="{{ vich_uploader_asset(recette, 'imageFile')}}" class="card-img-top" alt="recettes">
             <div class="card-body ">
               <h5 class="card-title">{{ recette.titre}}</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="{{ path('app_detail_recette', {'id': detail.id })}}" class="btn btn-primary">voir</a>
+                <a href="{{path('app_detail_recette', {'recette': recette.id })}}" class="btn btn-primary">voir</a>  
             </div>
           </div>
     
@@ -50,10 +25,7 @@
 {% endblock %}
 
 {% block javascripts %}
-<script>
 
-
-</script>
     
 {% endblock  %}
 

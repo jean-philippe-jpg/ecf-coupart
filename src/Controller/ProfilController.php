@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/profil')]
 class ProfilController extends AbstractController
 {
-    #[Route('/', name: 'app_accueil')]
+    #[Route('/', name: 'app_profil')]
 
     public function recettes( Request $Request, RecettesRepository $RecettesRepository, EntityManagerInterface $entityManager): Response
     {
