@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\CommentsRecettes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Float_;
 
 /**
  * @extends ServiceEntityRepository<CommentsRecettes>
@@ -24,17 +25,17 @@ class CommentsRecettesRepository extends ServiceEntityRepository
 //    /**
 //     * @return CommentsRecettes[] Returns an array of CommentsRecettes objects
 //     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function getMoyenneNotes($recetteId): float|null
+   {
+    return $this->createQueryBuilder('r')
+
+            ->select('AVG(r.note) as moyenneNotes')
+            ->where('r.recettes = :recetteId')
+            ->setParameter('recetteId', $recetteId)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?CommentsRecettes
 //    {

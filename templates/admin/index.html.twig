@@ -2,12 +2,14 @@
 
 {% block title %}Hello AdminController!{% endblock %}
 
-
-
 {% block body %}
+
+
+
+
 <div class="row  list-container">
    {% for recette in recettes %}
-    
+   
         <div class="card accueil" style="width: 18rem;">
           <img src="{{ vich_uploader_asset(recette, 'imageFile')}}" class="card-img-top" alt="recettes">
             <div class="card-body ">
@@ -23,12 +25,4 @@
 </div>
     
 {% endblock %}
-
-{% block javascripts %}
-
-    
-{% endblock  %}
-
-
-
 

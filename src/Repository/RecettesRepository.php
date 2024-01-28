@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Recettes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Null_;
 
 /**
  * @extends ServiceEntityRepository<Recettes>
@@ -51,4 +52,20 @@ class RecettesRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function  findRecettes($allergeneId = null)
+    {
+
+        $queryBuilder = $this->createQueryBuilder('r')
+                        ->leftjoin('r.allergenes', 'a');
+
+            if ($allergeneId !== null) {
+
+                $queryBuilder->where('a.id = :allergeneId')
+                    ->setParameter('allergeneId', $allergeneId);
+             
+    }
+
+            return $queryBuilder->getQuery()->getResult();
+  }
 }

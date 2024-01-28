@@ -75,11 +75,19 @@ class Recettes
     #[ORM\OneToMany(mappedBy: 'recettes', targetEntity: CommentsRecettes::class)]
     private Collection $commentaire;
 
+    #[ORM\ManyToMany(targetEntity: Allergenes::class, inversedBy: 'recettes')]
+    private Collection $allergenes;
+
+    #[ORM\ManyToMany(targetEntity: Regimes::class, inversedBy: 'recettes')]
+    private Collection $regimes;
+
     
     public function __construct()
     {   
         $this->users = new ArrayCollection();
         $this->commentaire = new ArrayCollection();
+        $this->allergenes = new ArrayCollection();
+        $this->regimes = new ArrayCollection();
     }
 
     public function __toString()
@@ -327,6 +335,54 @@ class Recettes
     {
         return $this->imageSize;
     }
+
+   /**
+    * @return Collection<int, allergenes>
+    */
+   public function getAllergenes(): Collection
+   {
+       return $this->allergenes;
+   }
+
+   public function addAllergene(allergenes $allergene): static
+   {
+       if (!$this->allergenes->contains($allergene)) {
+           $this->allergenes->add($allergene);
+       }
+
+       return $this;
+   }
+
+   public function removeAllergene(allergenes $allergene): static
+   {
+       $this->allergenes->removeElement($allergene);
+
+       return $this;
+   }
+
+   /**
+    * @return Collection<int, regimes>
+    */
+   public function getRegimes(): Collection
+   {
+       return $this->regimes;
+   }
+
+   public function addRegime(regimes $regime): static
+   {
+       if (!$this->regimes->contains($regime)) {
+           $this->regimes->add($regime);
+       }
+
+       return $this;
+   }
+
+   public function removeRegime(regimes $regime): static
+   {
+       $this->regimes->removeElement($regime);
+
+       return $this;
+   }
       
     
    

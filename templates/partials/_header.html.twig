@@ -10,6 +10,17 @@
           <a class="nav-link" href="/contact">Contact</a>
           <a class="nav-link" href="/profil">Profil</a>
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          
+          {% if app.user %}
+          <a class="utilisateur" style=" text-decoration: none; color: black; margin-left: 250%; " >{{app.user.prenom }}</a>
+          <a href="/logout" type="btn" style=" margin-left: 20px; width: 55px; height: 35px; background: blue; text-align: center; color: white; text-decoration: none; border-radius: 8px;"><strong>logout</strong></a>
+
+            {% else %}
+            <a href="/login" type="btn " style="width: 55px; height: 35px; background: blue; text-align: center; color: white; text-decoration: none; border-radius: 8px;"><strong>login</strong></a>
+          {% endif %}
+
+          
+            
         </div>
       </div>
     </div>

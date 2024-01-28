@@ -2,10 +2,11 @@
 
 namespace App\Controller\Admin;
 
-
+use App\Entity\Allergenes;
 use App\Entity\User;
 use App\Entity\Recettes;
 use App\Entity\CommentsRecettes;
+use App\Entity\Regimes;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -50,6 +51,8 @@ class DashboardController extends AbstractDashboardController
          yield MenuItem::linkToCrud('recettes', 'fas fa-list', Recettes::class);
          yield MenuItem::linkToCrud('patients', 'fa-solid fa-user', User::class);
          yield MenuItem::linkToCrud('commentsRecettes', 'fa-regular fa-comment', CommentsRecettes::class);
+         yield MenuItem::linkToCrud('regimes', 'fa-regular fa-comment', Regimes::class);
+         yield MenuItem::linkToCrud('allergenes', 'fa-regular fa-comment', Allergenes::class);
          
     }
 }

@@ -51,10 +51,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: CommentsRecettes::class)]
     private Collection $commentsRecettes;
 
+    #[ORM\ManyToMany(targetEntity: Allergenes::class, mappedBy: 'users')]
+    private Collection $allergene;
+
+    #[ORM\ManyToMany(targetEntity: Regimes::class, mappedBy: 'users')]
+    private Collection $regimes;
+
     public function __construct()
     {
         $this->recettes = new ArrayCollection();
         $this->commentsRecettes = new ArrayCollection();
+        $this->allergene = new ArrayCollection();
+        $this->regimes = new ArrayCollection();
     }
 
 
@@ -229,6 +237,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             if ($commentsRecette->getUsers() === $this) {
                 $commentsRecette->setUsers(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Allergenes>
+     */
+    public function getAllergene(): Collection
+    {
+        return $this->allergene;
+    }
+
+    public function addAllergene(Allergenes $allergene): static
+    {
+        if (!$this->allergene->contains($allergene)) {
+            $this->allergene->add($allergene);
+            $allergene->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAllergene(Allergenes $allergene): static
+    {
+        if ($this->allergene->removeElement($allergene)) {
+            $allergene->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Regimes>
+     */
+    public function getRegimes(): Collection
+    {
+        return $this->regimes;
+    }
+
+    public function addRegime(Regimes $regime): static
+    {
+        if (!$this->regimes->contains($regime)) {
+            $this->regimes->add($regime);
+            $regime->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegime(Regimes $regime): static
+    {
+        if ($this->regimes->removeElement($regime)) {
+            $regime->removeUser($this);
         }
 
         return $this;

@@ -2,24 +2,20 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\User;
+use App\Entity\Allergenes;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-
-class UserCrudController extends AbstractCrudController
+class AllergenesCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return User::class;
+        return Allergenes::class;
     }
 
-    
     public function configureFields(string $pageName): iterable
     {
        yield from parent::configureFields($pageName);
@@ -29,14 +25,11 @@ class UserCrudController extends AbstractCrudController
        # -allowMultipleChoices()
        # -renderExpanded()
        #];
-        #yield TextField::new('regime');
-        yield ArrayField::new('roles');
-        yield AssociationField::new('recettes');
-        yield AssociationField::new('regimes');
-        yield AssociationField::new('allergene');
+        #yield ArrayField::new('roles');
+        yield AssociationField::new('users');
+        #yield AssociationField::new('recettes');
         
         
 
     }
-    
 }

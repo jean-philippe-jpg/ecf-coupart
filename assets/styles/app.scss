@@ -1,6 +1,7 @@
 
 $teal: #20c997;
 $pink: #d63384;
+$blue: #2471a3;
 
 @import "~bootstrap/scss/bootstrap";
 
@@ -11,6 +12,13 @@ body {
 
 
 }
+
+.btn-login{
+
+    background: $blue;
+    width: 50px;
+}
+
 
 .role{
 
@@ -48,3 +56,8 @@ body {
   margin-left: 25vw;
 }
 
+.note {
+
+    display: none;
+    
+}

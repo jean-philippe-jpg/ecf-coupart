@@ -15,18 +15,27 @@ class CommentsRecettesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+
+        ->add('note', ChoiceType::class, [
+            'label' => 'votre note',
+            'choices'=> [
+                '5' => 5,
+                '4' => 4,
+                '3' => 3,
+                '2' => 2,
+                '1' => 1,
+            ],
+            'attr' => [
+                
+                'class' => 'note'
+            ],
+            
+            'expanded' => true,
+            'multiple' => false,
+        ])
             ->add('pseudo')
             ->add('message')
-            ->add('note', ChoiceType::class, [
-                'label' => 'note',
-                'choice'=> [
-                    '5' => 5,
-                    '4' => 4,
-                    '3' => 3,
-                    '2' => 2,
-                    '1' => 1,
-                ]
-            ])
+           
             ->add('envoyer', SubmitType::class)
             
         ;

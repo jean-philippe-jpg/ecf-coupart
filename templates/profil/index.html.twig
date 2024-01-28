@@ -2,7 +2,7 @@
 
 {% block title %}Hello ProfilController!{% endblock %}
 
-{% block body %}
+{% block stylcheet %}
 <style>
    
     .stars{
@@ -25,107 +25,24 @@
     
 </style>
 
-<div class="card-profil">
+{% endblock %}
 
-<h3> bonjour {{ app.user.prenom}}</h3>
+{% block body %}
 
-
-<a type="button" href="{{path('app_logout')}}" >deconnexion</a></a>
-</div>
+<div class="card-profil " style="margin-left: 30vw; margin-top: 10vh;">
 
 
-<div class="stars">
-    <i class="lar la-star" data-value="1"></i><i class="lar la-star" 
-    data-value="2"></i><i class="lar la-star" data-value="3"></i><i class="lar la-star" 
-    data-value="4"></i><i class="lar la-star" data-value="5"></i>
-   
-    
-</div>
-
-<input  type="hidden" style="margin-left: 40px;" name="note" id="note" value="0">
-
-
-</div>
+{% for recette in app.user.recettes %}
+<div class="card accueil " style="width: 18rem;">
+    <img src="{{ vich_uploader_asset(recette, 'imageFile')}}" class="card-img-top" alt="recettes">
+      <div class="card-body ">
+        <h5 class="card-title">{{ recette.titre}}</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a  type="btn"  style="width: 80px; height: 40px;  background: blue; color: white;" href="{{path('app_detail_recette', {'recette': recette.id })}}">voir</a>
+      </div>
+    </div>
+{% endfor %}
 
 {% endblock %}
 
 
-{% block javascripts %}
-<script>
-
-    window.onload= () =>{
-
-        const stars = document.querySelectorAll(".la-star" );
-        
-        const note = document.querySelector("#note");
-
-
-       for(star of stars){
-        star.addEventListener("mouseover", function(){
-            resetStars();
-            this.style.color = "red";
-           this.classList.add("las");
-           this.classList.remove("lar");
-
-         let previousStar = this.previousElementSibling;
-
-         while(previousStar){
-
-            previousStar.style.color = "red";
-            previousStar = previousStar.previousElementSibling;
-         }
-         
-        });
-
-    }
-
-    function resetStars(){
-
-        for(star of stars){
-
-            star.style.color = "black";
-        }
-
-
-    for(star of stars){
-
-        star.addEventListener("click", function(){
-
-          note.value = this.dataset.value
-        });
-      
-
-      star.addEventListener("mouseout", function(){
-        resetStars(note.value)
-    });
-}
-
-          function resetStars(note = 0){
-
-                  for(star of stars){
-
-                    if(star.dataset.value > note){
-                        star.style.color = "black";
-                        star.classList.add("las")
-                        star.classList.remove("lar")
-                    }else{
-
-                        star.style.color = "red"
-                        star.classList.add("las")
-                        star.classList.remove("lar")
-                    }
-
-                     
-                  }
-          }
-
-        }
-
-  }
-
-
-
-
-</script>
-
-        {% endblock %}

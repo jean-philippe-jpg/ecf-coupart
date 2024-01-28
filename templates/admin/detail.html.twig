@@ -2,24 +2,49 @@
 
 {% block title %}Description{% endblock %}
 
-{% block stylesheets %}
-{% endblock  %}
+
 
 {% block body %}
 
-<h1 style="text-align: center;  margin-top: 20px; color: pink;">Description</h1>
 
-<div class="card card-detail" style="width: 18rem;  margin-top: 10vh; margin-left: 30vw";
-  <img src="={{ vich_uploader_asset(recette, 'imageFile')}}" class="card-img-top" alt="{{ recette.titre }}">
+
+
+<h1 style="text-align: center;  margin-top: 20px; color: pink;">Description</h1>
+<div class="card card-detail" style="width: 18rem;  margin-top: 10vh; margin-left: 30vw";>
+<div>
+  note:  {{ moyenne}}
+  
+</div>
+
+  <img src="{{ vich_uploader_asset(recette, 'imageFile')}}" class="card-img-top" alt="{{ recette.titre }}">
     <div class="card-body ">
       <h5 class="card-title">{{ recette.description }}</h5>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         <a href="#" class="btn btn-primary">voir</a>  
     </div>
 
-    <div>
-      {{ form(form)}}
-    </div>
+     
+
+      {% if user %}
+      
+
+    {{ form_start(form) }}
+
+        {{ form_widget(form) }}
+
+    {{ form_end(form) }}
+
+      
+    
+     {% else %}
+
+      <p> vous devez etre connecter pour laisser un commentaire</p>
+      <a href="{{path('app_login')}}">login</a>
+
+    {% endif %}
+
+
+    
 
       
   </div >

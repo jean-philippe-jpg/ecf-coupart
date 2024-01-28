@@ -12,6 +12,17 @@
 
 </style>
 
+<div style="color: green;">
+  {% for reg in regime %}
+
+    {{ reg.name}}
+    {{ reg.recettes}}
+  
+{% endfor %}
+</div>
+
+
+
 {% for user in users %}
 <div class="liste-utilisateurs">
     {{ user.prenom}}

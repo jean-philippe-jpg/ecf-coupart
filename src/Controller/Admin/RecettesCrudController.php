@@ -24,11 +24,13 @@ class RecettesCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield from parent::configureFields($pageName);
-        yield TextField::new('allergene');
-        yield TextField::new('regime');
+        #yield TextField::new('allergenes');
+        #yield TextField::new('regimes');
         yield TextareaField::new('imageFile')->setFormType(VichImageType::class)->hideOnIndex();
         yield ImageField::new('imageName')->setBasePath('images/recettes')->hideOnForm();
         yield AssociationField::new('users');
+        yield AssociationField::new('regimes');
+        yield AssociationField::new('allergenes');
         
         
     }
