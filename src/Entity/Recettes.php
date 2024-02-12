@@ -63,7 +63,7 @@ class Recettes
     private ?int $imageSize = null;
 
     
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true)] 
     private ?\DateTimeImmutable $updatedAt = null;
 
     ##[ORM\ManyToOne(inversedBy: 'recettes')]
@@ -90,10 +90,11 @@ class Recettes
         $this->regimes = new ArrayCollection();
     }
 
-    public function __toString()
+   
 
+    public function __toString()
     {
-        return $this->getTitre();#.' '.$this->getId();#.' '.$this->getImageName();
+         return $this->getTitre();
     }
 
     public function getId(): ?int
@@ -301,7 +302,7 @@ class Recettes
       }
     }
    
-    public function getUpdatedAt(): ?File
+    public function getUpdatedAt() 
     {
         return $this->updatedAt;
     }

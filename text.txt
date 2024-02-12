@@ -1,0 +1,7 @@
+
+
+
+
+
+
+<p>ceci est test de requette <strong>AJAX</strong></P>

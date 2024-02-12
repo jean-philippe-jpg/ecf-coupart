@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Description{% endblock %}
+
+
+
+{% block body %}
+
+
+<div   style=" padding: 30px; ">
+  
+  <br>
+ <strong>note:</strong>
+ 
+ <br>
+ <strong>allergene: </strong>
+
+     {# boucles {% for %}, bouclant sur toute les données de la table allergenes et régimes, afficher dans les recettes concernner #}
+
+ {% for recettes in recette.allergenes %}
+  
+      <a href="{{path('app_index_recette', {'allergeneId': recette.id})}}">{{ recettes.name}}</a>
+ {% endfor %}
+
+ <br>
+
+ {% for regimes in recette.regimes %}
+  
+      <a href="{{path('app_index_recette', {'allergeneId': recette.id})}}">{{ regimes.name}}</a>
+ {% endfor %}
+
+
+</div>
+
+
+<h1 style="text-align: center;  margin-top: 20px; color: pink;">Description</h1>
+
+<div class="card card-detail" style="width: 18rem;  margin-top: 10vh; margin-left: 30vw";>
+
+          {#  affichage d'image via le bundle vichUploader #}
+  <img src="{{ vich_uploader_asset(recette, 'imageFile')}}" class="card-img-top" alt="{{ recette.titre }}">
+
+
+            {# div contenant les données de la recette #}
+    <div class="card-body ">
+      <h5 class="card-title">{{ recette.description }}</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">voir</a>  
+    </div>
+
+     
+       {# condition {% if %}, affichant le formulaire de commentaire, uniquement si l'utilisateur est connécté #}
+
+      {% if user %}
+      
+      <div class="">
+
+      </div>
+    {{ form_start(form) }}
+
+        {{ form_widget(form) }}
+
+    {{ form_end(form) }}
+
+     {% else %}
+
+      <p> vous devez etre connecter pour laisser un commentaire</p>
+      
+      <a href="{{path('app_login')}}">login</a>
+
+    {% endif %}
+   
+  </div >
+
+{% endblock %}
+

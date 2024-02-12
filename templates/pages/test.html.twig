@@ -1,0 +1,32 @@
+
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+
+<h1 style="color: rgb(222, 33, 33);  padding: 50px;">AJAX</h1>
+
+<button  onclick="show()">afficher les recettes</button>
+
+<div  id="recettes">
+<p> ici seront afficher les recettes</p>
+
+</div>
+
+
+
+
+{% block javascripts %}
+
+<script>
+ var xhr = new XMLHttpRequest();
+
+ xhr.open("GET", "127.0.0.1:8000/", true)
+ xhr.send();
+        
+</script>
+
+{% endblock %}
+    
+{% endblock %}
+

@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ContactsController extends AbstractController
 {
     #[Route('/contact', name: 'app_contact')]
-    public function index( ContactsRepository $ContactsRepository, EntityManagerInterface $EntityManagerInterface, Request $request, MailerInterface $mailer ): Response
+    public function index( Request $request, MailerInterface $mailer ): Response
     {
         $contact = new Contacts;
         $contactForm = $this->createForm( ContactsType::class, $contact);
@@ -24,8 +24,8 @@ class ContactsController extends AbstractController
 
         if ($contactForm->isSubmitted() && $contactForm->isValid()){
 
-           # $entityManager->persist($contact);
-           # $entityManager->flush();
+            #$entityManager->persist($contact);
+            #$entityManager->flush();
             
 
             $email = $contact->getEmail();

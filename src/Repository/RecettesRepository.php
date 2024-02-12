@@ -53,13 +53,13 @@ class RecettesRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-    public function  findRecettes($allergeneId = null)
+    public function  findRecettes( $allergeneId = null)
     {
 
         $queryBuilder = $this->createQueryBuilder('r')
-                        ->leftjoin('r.allergenes', 'a');
+                        ->leftjoin( 'r.allergenes', 'a');
 
-            if ($allergeneId !== null) {
+            if ( $allergeneId !== null) {
 
                 $queryBuilder->where('a.id = :allergeneId')
                     ->setParameter('allergeneId', $allergeneId);
@@ -68,4 +68,24 @@ class RecettesRepository extends ServiceEntityRepository
 
             return $queryBuilder->getQuery()->getResult();
   }
+
+  public function  findRecette( $regimesId = null)
+  {
+
+      $queryBuilder = $this->createQueryBuilder('r')
+                      ->leftjoin( 'r.regimes', 'r');
+
+          if ( $regimesId !== null) {
+
+              $queryBuilder->where('r.id = :regimesId')
+                  ->setParameter('regimesId', $regimesId);
+           
+  }
+
+          return $queryBuilder->getQuery()->getResult();
+}
+
+  
+
+
 }

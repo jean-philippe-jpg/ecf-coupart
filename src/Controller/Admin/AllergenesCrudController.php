@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class AllergenesCrudController extends AbstractCrudController
 {
+
     public static function getEntityFqcn(): string
     {
         return Allergenes::class;
@@ -18,7 +19,7 @@ class AllergenesCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-       yield from parent::configureFields($pageName);
+        yield from parent::configureFields($pageName);
        #$fields[
        # ChoiceField::new('roles')
        # -setChoices(['ROLE_ADMIN'=>'ROLE_ADMIN', 'ROLE_USER' => 'ROLE_USER'])
@@ -27,9 +28,6 @@ class AllergenesCrudController extends AbstractCrudController
        #];
         #yield ArrayField::new('roles');
         yield AssociationField::new('users');
-        #yield AssociationField::new('recettes');
-        
-        
-
-    }
+        yield AssociationField::new('recettes');
+     }
 }

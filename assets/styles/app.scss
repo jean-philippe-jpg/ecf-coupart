@@ -1,4 +1,7 @@
 
+
+
+
 $teal: #20c997;
 $pink: #d63384;
 $blue: #2471a3;
@@ -10,8 +13,53 @@ body {
     
     background:  $teal;
 
+    font-family: 'Kanit', sans-serif;
+
 
 }
+
+.profil{
+
+    display: flex;
+    margin-top: 50px;
+    
+    width: 30vw;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left: 20px;
+}
+
+
+.card-profil{
+
+    margin-top: 20px;
+    background: white;
+    border-radius: 10px;
+    width: 200px;
+    box-shadow: 10px 5px 6px  rgb(39, 38, 38);
+    
+}
+
+.card-img-profil{
+    border-radius: 10px 10px 0px 0px;
+    width: 200px;
+    height: 120px;
+}
+
+.btn-profil{
+    
+    color:  white;
+    text-decoration: none;
+}
+
+.primary-profil{
+
+margin-bottom: 10px;
+margin-left: 10px;
+}
+
+
+
 
 .btn-login{
 
@@ -57,7 +105,44 @@ body {
 }
 
 .note {
-
-    display: none;
-    
+    display: flex;
+    flex-flow: row-reverse;
+    justify-content: left;
+    //display: none;//
 }
+
+.note input[type="radio"] {
+    display: none;
+}
+
+.note:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    font-size:30px;
+    color:#ccc;
+}
+
+
+
+.note:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.note > input:checked ~ label {
+    color: #ffc700;    
+}
+.note.enabled:not(:checked) > label:hover,
+.note.enabled:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+
+.note.enabled > input:checked + label:hover,
+.note.enabled > input:checked + label:hover ~ label,
+.note.enabled > input:checked ~ label:hover,
+.note.enabled > input:checked ~ label:hover ~ label,
+.note.enabled > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+

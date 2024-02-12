@@ -33,7 +33,7 @@ class Regimes
     public function __toString()
 
 {
-    return $this->getName().' '.$this->getRecettes();
+    return $this->getName();
     
 }
 

@@ -30,11 +30,9 @@ class Allergenes
         $this->recettes = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(){
 
-{
-
-    return $this->getName();
+          return $this->getName();
     
 }
 
@@ -54,6 +52,7 @@ class Allergenes
 
         return $this;
     }
+
 
     /**
      * @return Collection<int, User>

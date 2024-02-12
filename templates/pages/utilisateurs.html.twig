@@ -12,22 +12,13 @@
 
 </style>
 
-<div style="color: green;">
-  {% for reg in regime %}
-
-    {{ reg.name}}
-    {{ reg.recettes}}
-  
-{% endfor %}
-</div>
-
-
-
+{# affichage de la liste des utilisateurs, par une boucle {% for %} #}
 {% for user in users %}
 <div class="liste-utilisateurs">
     {{ user.prenom}}
     {% for role in user.roles %}
-
+    
+{# la condition {% if %}, precise si l'utilisateur est un patient ou un administrateur suivant son ROLE #}
        {% if role == "ROLE_USER" %}
         <strong class="role">patient</strong>
 

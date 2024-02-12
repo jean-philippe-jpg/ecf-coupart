@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+
+<title style="color: white;">AJAX</title>
+<section style="padding: 20px;">
+
+  
+  
+
+</section>
+
+  <article  style="display: flex;" id="utilisateurs">
+
+</article>
+
+<div style="margin-left: 100px; margin-top: 20px;" id="pagination">
+
+</div>
+
+<div class="row  list-container">
+
+  {# boucle {% for %}, affichant la totalité des recettes #}
+   {% for recette in recettes %}
+   
+        <div class="card accueil" style="width: 18rem;">
+          <img style="max-width: 100%;" src="{{ vich_uploader_asset(recette, 'imageFile')}}" class="card-img-top" alt="recettes">
+            <div class="card-body ">
+              <h5 class="card-title">{{ recette.titre}}</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h5 style="color: black;">commentaire:</h5>
+              <div style="color: black;">
+
+
+                {% if commentaire %}
+
+                {% for comments in recette.commentaire %}
+               
+                {{comments.note}}
+                {{ comments.message}}
+                
+                
+                {% endfor %}
+
+                 {% else %}
+                 <p>soyez le premier à poster un commentaire</p>
+                {% endif %}
+             
+                
+                </div>
+                <a href="{{path('app_detail_recette', {'recette': recette.id })}}" class="btn btn-primary">voir</a>  
+            </div>
+          </div>
+{% endfor %}
+</div>
+
+{% block javascripts %}
+
+<script>
+
+  
+
+</script>
+
+{% endblock %}
+    
+{% endblock %}
+

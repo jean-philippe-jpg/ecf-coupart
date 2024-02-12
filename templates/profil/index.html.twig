@@ -1,48 +1,35 @@
+
 {% extends 'base.html.twig' %}
 
+
+
+
 {% block title %}Hello ProfilController!{% endblock %}
-
-{% block stylcheet %}
-<style>
-   
-    .stars{
-
-        padding: 40px;
-    }
-
-    .comm{
-
-        display: none;
-    }
-
-    .card-profil{
-
-       
-       margin-top: 20px;
-       margin-left: 40vw;
-    }
-
-    
-</style>
-
-{% endblock %}
-
 {% block body %}
 
-<div class="card-profil " style="margin-left: 30vw; margin-top: 10vh;">
 
 
-{% for recette in app.user.recettes %}
-<div class="card accueil " style="width: 18rem;">
-    <img src="{{ vich_uploader_asset(recette, 'imageFile')}}" class="card-img-top" alt="recettes">
-      <div class="card-body ">
-        <h5 class="card-title">{{ recette.titre}}</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a  type="btn"  style="width: 80px; height: 40px;  background: blue; color: white;" href="{{path('app_detail_recette', {'recette': recette.id })}}">voir</a>
+
+ {#  la boucle {% for %}, affiche les recettes personnalisées de l'utilisateur #}
+
+ <div class=" profil"  >
+  {% for recette in app.user.recettes %}
+
+<div class="card-profil" style="font-size: 0.8rem;  ">
+  <img  src="{{ vich_uploader_asset(recette, 'imageFile')}}" class="card-img-profil"   alt="recettes">
+    <div class="card-body ">
+      <h5 class="card-title"><h3>{{ recette.titre}}</h3></h5>
+      <p class="card-text">description</p>
+      <button type="button" class="btn btn-primary  primary-profil"><a class="btn-profil" href="{{path('app_detail_recette', {'recette': recette.id })}}">voir</a></button>
+    
       </div>
-    </div>
-{% endfor %}
 
+      
+  </div>
+                
+{% endfor %}
+ </div>
+  
 {% endblock %}
 
 
