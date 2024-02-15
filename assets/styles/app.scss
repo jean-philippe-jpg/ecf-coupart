@@ -5,59 +5,85 @@
 $teal: #20c997;
 $pink: #d63384;
 $blue: #2471a3;
+$beige: #f9e79f;
 
 @import "~bootstrap/scss/bootstrap";
 
 
 body {
     
-    background:  $teal;
-
+    
     font-family: 'Kanit', sans-serif;
-
+    background-size: cover;
+    background-image: url("/assets/media/background_cuisine.jpg");
 
 }
+
+
 
 .profil{
 
     display: flex;
     margin-top: 50px;
-    
+    margin-left: 50px;
     width: 30vw;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-left: 20px;
-}
-
-
-.card-profil{
-
-    margin-top: 20px;
-    background: white;
-    border-radius: 10px;
-    width: 200px;
-    box-shadow: 10px 5px 6px  rgb(39, 38, 38);
     
 }
 
-.card-img-profil{
+.accueil{
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 50vw;
+    margin-left: 20vw;
+}
+
+.boitesRecettes{
+
+    margin-top: 20px;
+    background: $beige;
+    border-radius: 10px;
+    width: 200px;
+    box-shadow: 10px 5px 6px  rgb(124, 122, 122);
+    
+}
+
+.card-img-recettes{
     border-radius: 10px 10px 0px 0px;
     width: 200px;
     height: 120px;
 }
 
-.btn-profil{
+.btn-recettes{
     
     color:  white;
     text-decoration: none;
+    margin-left: 10px;
 }
 
-.primary-profil{
-
+.btn-primary{
 margin-bottom: 10px;
 margin-left: 10px;
 }
 
+
+.card-body{
+
+    padding: 15px;
+}
+.boitesRecettes:hover{
+    box-shadow: 10px 5px 6px  rgb(39, 38, 38);   
+}
+
+.btn-primary:hover{
+    width: 100px;
+    height: 50px;
+    background: rgb(4, 4, 245);
+    
+}
 
 
 
@@ -68,6 +94,30 @@ margin-left: 10px;
 }
 
 
+
+.detail{
+     background: none;
+     border: none;
+    width: 200px;
+     margin-top: 10vh;
+      margin-left: 30vw;
+}
+
+.img-detail{
+
+    width: 200px;
+}
+
+ .form-comments{
+
+    margin-left: 10vw;
+ }
+
+
+ .filtre-allergenes{
+
+    background: $beige;
+ }
 .role{
 
     color: $pink-500;
@@ -86,16 +136,20 @@ margin-left: 10px;
     
 }
 
-.accueil{
 
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    color: $pink;
-    margin-right: 10vw;
-    //margin-top: 20vh;
+.card-accueil{
     
+    margin-bottom: 20px;
+    margin-right: 10vw;
+    width: 200px;
 }
+
+.img-accueil{
+
+    width: 200px;
+    height: 150px;
+}
+
 
 .list-container{
 
@@ -144,5 +198,10 @@ margin-left: 10px;
 .note.enabled > input:checked ~ label:hover ~ label,
 .note.enabled > label:hover ~ input:checked ~ label {
     color: #c59b08;
+}
+
+.badge{
+
+    margin-left: 50px;
 }
 

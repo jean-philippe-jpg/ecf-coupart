@@ -2,69 +2,93 @@
 
 {% block title %}Hello AdminController!{% endblock %}
 
+
+
+
 {% block body %}
 
-<title style="color: white;">AJAX</title>
-<section style="padding: 20px;">
 
-  
-  
+  {#bouton affichant les filtres allergenes et regimes#}
 
-</section>
+  {# pour studi: l'élément à afficher disparait apres le chargement total de la page le script est interne, pour ce test #}
 
-  <article  style="display: flex;" id="utilisateurs">
+<a href=""><span id="badgeAllergenes" class="badge text-bg-primary" style="margin-left: 20vw; margin-top: 20px;">allergenes</span></a>
+<a href=""><span id="badgeRegimes" class="badge text-bg-primary" style=" margin-top: 20px;">regimes</span></a>
 
-</article>
+  {# affichage des filtres#}
 
-<div style="margin-left: 100px; margin-top: 20px;" id="pagination">
+<div id="filtre-allergenes"  style=" width: 150px; height: 200px; padding: 30px; background: beige; margin-top: 30px; margin-left: 30px;  display: none; position:absolute;">
+
+  {% for allergenes in allergene %}
+
+  <a style="text-decoration: none;  color: black;" href="{{path('app_index_recette', {'allergeneId': allergenes.id})}}"><strong>{{ allergenes.name}}</strong></a>
+    
+  {% endfor %}
+</div>
+
+
+<div  id="filtre-regimes"  style=" width: 150px; height: 200px; padding: 30px; background: beige; margin-top: 30px; margin-left: 30px; display:none; position:absolute;">
+  {% for regimes in regime %}
+
+  <a style="text-decoration: none;  color: black;" href="{{path('app_index_recette', {'regimesId': regimes.id})}}"><strong>{{ regimes.name}}</strong></a>
+    
+  {% endfor %}
 
 </div>
 
-<div class="row  list-container">
+
+<div class="accueil" >
 
   {# boucle {% for %}, affichant la totalité des recettes #}
    {% for recette in recettes %}
    
-        <div class="card accueil" style="width: 18rem;">
-          <img style="max-width: 100%;" src="{{ vich_uploader_asset(recette, 'imageFile')}}" class="card-img-top" alt="recettes">
+        <div style="width: 200px;" class="card-recettes   boitesRecettes" >
+          <img   src="{{ vich_uploader_asset(recette, 'imageFile')}}" class="card-img-recettes " alt="recettes">
             <div class="card-body ">
               <h5 class="card-title">{{ recette.titre}}</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <h5 style="color: black;">commentaire:</h5>
-              <div style="color: black;">
-
-
+              <p class="card-text">description</p>
+              <p><strong>commentaires</strong></strong></p>
+              <div class="commentaire">
                 {% if commentaire %}
 
                 {% for comments in recette.commentaire %}
-               
+                 
                 {{comments.note}}
-                {{ comments.message}}
-                
+                <br>
                 
                 {% endfor %}
-
+                </div>
                  {% else %}
                  <p>soyez le premier à poster un commentaire</p>
-                {% endif %}
-             
-                
-                </div>
-                <a href="{{path('app_detail_recette', {'recette': recette.id })}}" class="btn btn-primary">voir</a>  
-            </div>
+                {% endif %} 
           </div>
+                <a  href="{{path('app_detail_recette', {'recette': recette.id })}}" class=" btn btn-primary ">voir</a>
+                </div>
+               
 {% endfor %}
 </div>
 
+{% endblock %}
+
 {% block javascripts %}
+
 
 <script>
 
-  
+   //script du systeme de filtres 
+
+  var hiddenBox = $( "#filtre-allergenes" );
+  var hiddenBox2 = $( "#filtre-regimes" );
+$( "#badgeAllergenes" ).on( "click", function( event ) {
+  hiddenBox.show();
+});
+
+$( "#badgeRegimes" ).on( "click", function( event ) {
+  hiddenBox2.show();
+});
+   
 
 </script>
 
-{% endblock %}
-    
 {% endblock %}
 

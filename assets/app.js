@@ -12,7 +12,12 @@ import './styles/app.scss';
 import './bootstrap';
 
 
+const filter = document.getElementById('badgeAllergenes');
 
+filter.addEventListener('click', ()=> {
+
+    alert('bouton cliquer');
+});
 
 
 

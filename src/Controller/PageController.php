@@ -27,8 +27,7 @@ class PageController extends AbstractController
 {
     #[Route('/', name: 'app_index_recette')]
     public function index( CommentsRecettesRepository $commentaire, RegimesRepository $RegimesRepository, AllergenesRepository $AllergenesRepository, RecettesRepository $RecettesRepository, Request $request): Response
-    {
-          
+    {       
          //recuperation des recettes par l'id des type de regime et des allergenes
         $allergeneId = $request->get('allergeneId');
         $regimesId = $request->get('regimesId');
@@ -47,16 +46,20 @@ class PageController extends AbstractController
             'allergene' => $allergenes,
             'regime' => $regimes,
             'commentaire' => $commentaire,
-           
+
+            
         ]);       
      }
     
 
     #[Route('/detail/{recette}', name: 'app_detail_recette')]
-    public function detail( CommentsRecettesRepository $commentsRecettesRepository, Recettes $recette, Request $request, EntityManagerInterface $entityManager, Security $security): response
-    {
-            // récuperation de la moyenne des notes
-            $moyenneNotes = $commentsRecettesRepository->getMoyenneNotes($recette->getId());
+    public function detail(CommentsRecettesRepository $commentsRecettesRepository,  Recettes $recette, Request $request, EntityManagerInterface $entityManager, Security $security): response
+    {         
+        
+        // récuperation de la moyenne des notes
+        $moyenneNotes = $commentsRecettesRepository->getMoyenneNotes($recette->getId());
+          
+            
 
             // recuperation d'un utilisateur 
             $user = $security->getUser();
@@ -85,6 +88,8 @@ class PageController extends AbstractController
         'form' => $form->createView(),
         'user' => $user,
         'moyenne' => $moyenneNotes,
+           
+        
         
        ]);
 

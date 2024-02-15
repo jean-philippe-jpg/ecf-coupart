@@ -12,16 +12,15 @@
 
  {#  la boucle {% for %}, affiche les recettes personnalisées de l'utilisateur #}
 
- <div class=" profil"  >
+ <div class=" profil" >
   {% for recette in app.user.recettes %}
 
-<div class="card-profil" style="font-size: 0.8rem;  ">
-  <img  src="{{ vich_uploader_asset(recette, 'imageFile')}}" class="card-img-profil"   alt="recettes">
+<div style="width: 200px; background: white; margin-top: 20px;" class="card-recettes  boitesRecettes" style="font-size: 0.8rem;">
+  <img style="width: 200px; height: 150px;" src="{{ vich_uploader_asset(recette, 'imageFile')}}" class="card-img-recettes"   alt="recettes">
     <div class="card-body ">
       <h5 class="card-title"><h3>{{ recette.titre}}</h3></h5>
       <p class="card-text">description</p>
-      <button type="button" class="btn btn-primary  primary-profil"><a class="btn-profil" href="{{path('app_detail_recette', {'recette': recette.id })}}">voir</a></button>
-    
+      <a class=" btn-primary" href="{{path('app_detail_recette', {'recette': recette.id })}}">voir</a>
       </div>
 
       

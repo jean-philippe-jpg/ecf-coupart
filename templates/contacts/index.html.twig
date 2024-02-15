@@ -8,16 +8,25 @@
 
 <style>
 
-    .contactForm{
-        
-        margin-top: 20px;
-        margin-left: 40vw;
-    }
+    
 </style>
 
   {# affichage du formulaire de contact #}
-     <div class="contactForm">
-        {{ form( contactForm )}}
+     <div class="contactForm" style="width: 50vw;">
+
+        {{ form_start(contactForm,{'attr': {'style': 'margin-left: 40vw;  margin-top: 100px;'}}  ) }}
+        <br>
+        <p> <strong>email</strong></p>{{ form_widget( contactForm.email,{'attr': {'style': ' border: 3px solid lightblue; border-radius: 10px; margin-bottom: 5px;'}} )}}
+        <br>
+        <p> <strong>nom:</strong></p>{{ form_widget( contactForm.nom,{'attr': {'style': ' border: 3px solid lightblue; border-radius: 10px; margin-bottom: 5px;'}} )}}
+        <br>
+        <p> <strong>prenom:</strong></p>{{ form_widget( contactForm.prenom,{'attr': {'style': ' border: 3px solid lightblue; border-radius: 10px; margin-bottom: 5px;'}})}}
+        <br>
+        <p> <strong>message:</strong></p>{{ form_widget( contactForm.message,{'attr': {'style': ' border: 3px solid lightblue; border-radius: 10px; margin-bottom: 5px;'}} )}}
+        <br>
+        {{ form_widget( contactForm.envoyer,{'attr': {'style': ' background: green; color: white;border-radius: 10px; margin-bottom: 5px;'}} )}}
+        <br>
+        {{ form_end(contactForm) }}
      </div>
     
 

@@ -1,8 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Description{% endblock %}
-
-
 
 {% block body %}
 
@@ -11,6 +8,7 @@
   
   <br>
  <strong>note:</strong>
+ {{ moyenne }}
  
  <br>
  <strong>allergene: </strong>
@@ -33,12 +31,12 @@
 </div>
 
 
-<h1 style="text-align: center;  margin-top: 20px; color: pink;">Description</h1>
+<h1 style="text-align: center;  margin-top: 20px; ">Description</h1>
 
-<div class="card card-detail" style="width: 18rem;  margin-top: 10vh; margin-left: 30vw";>
+<div class="card detail" style="width: 50vw; margin-left: 25vw;"  ;>
 
           {#  affichage d'image via le bundle vichUploader #}
-  <img src="{{ vich_uploader_asset(recette, 'imageFile')}}" class="card-img-top" alt="{{ recette.titre }}">
+  <img style="width: 30vw; height: 30vh; margin-left: 10vw; border-radius: 15px;" src="{{ vich_uploader_asset(recette, 'imageFile')}}" class="img-detail" alt="{{ recette.titre }}">
 
 
             {# div contenant les données de la recette #}
@@ -50,17 +48,23 @@
 
      
        {# condition {% if %}, affichant le formulaire de commentaire, uniquement si l'utilisateur est connécté #}
-
+       <div class=" form-comments" style="margin-left: 15vw; margin-bottom: 50px;">
       {% if user %}
-      
-      <div class="">
-
-      </div>
-    {{ form_start(form) }}
-
-        {{ form_widget(form) }}
-
+          <button type="btn"  class="btn-comments"></button>
+        {{ form_start(form) }}
+           <div>
+            {{ form_widget(form.note) }}
+            <br>
+            {{  form_widget(form.pseudo, {'attr': {'style': 'border: 3px solid lightblue; border-radius: 10px; margin-bottom: 5px;'}}) }}
+            <br>
+            {{ form_widget(form.message, {'attr': {'style': 'border: 3px solid lightblue; border-radius: 10px; margin-bottom: 5px;'}}) }}
+            <br>
+            {{ form_widget(form.envoyer, {'attr': {'style': ' background: green; color: white;border-radius: 10px; margin-bottom: 5px;'}}) }}
+           
+        
     {{ form_end(form) }}
+      </div>
+    
 
      {% else %}
 
