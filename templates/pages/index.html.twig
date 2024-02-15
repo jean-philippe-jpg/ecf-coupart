@@ -48,20 +48,16 @@
               <h5 class="card-title">{{ recette.titre}}</h5>
               <p class="card-text">description</p>
               <p><strong>commentaires</strong></strong></p>
-              <div class="commentaire">
+            <div class="commentaire">
                 {% if commentaire %}
-
                 {% for comments in recette.commentaire %}
-                 
                 {{comments.note}}
                 <br>
-                
                 {% endfor %}
-                </div>
                  {% else %}
                  <p>soyez le premier à poster un commentaire</p>
                 {% endif %} 
-          </div>
+            </div>
                 <a  href="{{path('app_detail_recette', {'recette': recette.id })}}" class=" btn btn-primary ">voir</a>
                 </div>
                
